@@ -1,10 +1,14 @@
 library(shiny)
 library(tidyverse)
 
-load("C:/Users/bluet/Downloads/data-music.RData")
+# Load data
+
+load("C:/Users/bluet/Downloads/data-music.RData") # Enter your file location here, be sure to use / and not \
 musicData <- as.data.frame(data_music)
 
 numericVars <- names(musicData)[sapply(musicData, is.numeric)]
+
+# User interface code
 
 ui <- fluidPage(
   titlePanel("Shiny Music Data Explorer"),
@@ -19,6 +23,8 @@ ui <- fluidPage(
   )
 )
 
+# Server code
+
 server <- function(input, output) {
   
   output$plot1 <- renderPlot({
@@ -30,5 +36,7 @@ server <- function(input, output) {
       labs(title = paste("Scatterplot of", input$yVar, "vs", input$xVar))
   })
 }
+
+# Run app
 
 shinyApp(ui, server)
